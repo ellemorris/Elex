@@ -1,4 +1,6 @@
 Elex
 ====
 
-Opim 311 Project
+OPIM 311 Project
+
+Non-negative matrix factorization :)
