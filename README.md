@@ -3,5 +3,5 @@ Elex
 
 OPIM 311 Project
 
-arXiv data 
+arXiv data! 
 Non-negative matrix factorization :)
