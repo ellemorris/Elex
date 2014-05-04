@@ -4,16 +4,16 @@ import sqlite3 as lite
 import sys
 
 #create table, given category
-def APIcall(cat):
-	url = 'http://export.arxiv.org/api/query?search_query=cat:'+ cat + '&max_results=100'
+def APIcall(cat, maxResults = 100):
+	url = 'http://export.arxiv.org/api/query?search_query=cat:'+ cat + '&max_results=' + str(maxResults)
 	data = urllib2.urlopen(url).read()
 	d =  feedparser.parse(data)
 	
 	#create table
 	con=lite.connect('test.db')
 	cur = con.cursor()
-	cur.execute("DROP TABLE IF EXISTS articles")
-	cur.execute("CREATE TABLE articles(id TEXT, category TEXT, title TEXT, summary TEXT, author TEXT)")
+	cur.execute("CREATE TABLE IF NOT EXISTS articles\
+		(id TEXT, category TEXT, title TEXT, summary TEXT, author TEXT)")
 
 	#populate table
 	for i in range(len(d['entries'])):
@@ -28,8 +28,8 @@ def APIcall(cat):
 	return rows
 
 #look at table for specific category
-def retrieveRows (cat):
-	rows = APIcall(cat)
+def retrieveRows (cat, maxResults = 100):
+	rows = APIcall(cat, maxResults)
 	for row in rows:
 		print row
 
@@ -43,6 +43,6 @@ def colNames():
 		print c[0], c[1], c[2]
 	con.close()
 
-#retrieveRows('q-fin.ST')
-#retrieveRows('cs.MM')
+# retrieveRows('q-fin.ST')
+#retrieveRows('cs.MM',110)
 
