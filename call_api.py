@@ -33,7 +33,8 @@ def retrieveRows (cat, maxResults = 100):
 	for row in rows:
 		print row
 
-#get column names
+#Get column names
+#useful utility feature for undestanding what is going on
 def colNames():
 	con=lite.connect('test.db')
 	cur = con.cursor()
@@ -45,4 +46,4 @@ def colNames():
 
 # retrieveRows('q-fin.ST')
 #retrieveRows('cs.MM',110)
-
+APIcall('cs.MM', 500)
